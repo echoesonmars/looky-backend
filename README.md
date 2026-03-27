@@ -7,6 +7,12 @@ Monorepo with two services:
 | [node/](node/) | Express + TypeScript | Main HTTP API, items, optional gateway to Python |
 | [python/](python/) | FastAPI | ML / heavy compute endpoints (extend here) |
 
+## Database (Supabase Postgres)
+
+1. Create a project at [supabase.com](https://supabase.com).
+2. Run [`database/schema.sql`](database/schema.sql) in the SQL Editor (creates `public.items` + read policy).
+3. In `node/.env`, set `DATABASE_URL` to the **connection string** from **Settings → Database** (URI). Use **Session mode** or direct `postgres` URL; URL-encode special characters in the password.
+
 ## Node.js (`node/`)
 
 ```bash
@@ -19,10 +25,10 @@ npm run dev
 Default: [http://localhost:3001](http://localhost:3001)
 
 - `GET /api/health` — Node health
-- `GET /api/items` — placeholder list
+- `GET /api/items` — rows from `public.items` (requires `DATABASE_URL`)
 - `GET /api/services` — Node + Python reachability (set `PYTHON_SERVICE_URL` in `.env`)
 
-Deploy this folder as a separate Vercel project (see [node/vercel.json](node/vercel.json)).
+Deploy this folder as a separate Vercel project (see [node/vercel.json](node/vercel.json)). Add `DATABASE_URL` in Vercel env vars.
 
 ## Python / FastAPI (`python/`)
 

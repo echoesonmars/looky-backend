@@ -13,3 +13,8 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 .vercel
+
+# allow committed env templates
+!.env.example
+!node/.env.example
+!python/.env.example
