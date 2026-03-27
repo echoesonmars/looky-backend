@@ -1,5 +1,5 @@
-const express = require('express');
-const cors = require('cors');
+import express, { Request, Response } from 'express';
+import cors from 'cors';
 require('dotenv').config();
 
 const app = express();
@@ -10,16 +10,16 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-app.get('/api/health', (req, res) => {
+app.get('/api/health', (req: Request, res: Response) => {
   res.json({ status: 'OK', message: 'Looky Backend is running' });
 });
 
-app.get('/api/items', (req, res) => {
+app.get('/api/items', (req: Request, res: Response) => {
   res.json({ items: [] });
 });
 
 // Export for Vercel
-module.exports = app;
+export default app;
 
 // For local development
 if (require.main === module) {
